@@ -6,23 +6,31 @@ This is a demo repo for the Medium article [Add Chatting to Flutter Apps with So
 
 This project demonstrates how to implement real-time chat functionality in a Flutter application using Socket.IO and deploy the backend server to Google Cloud Run.
 
+![Local Image](./chat_demo.gif)
+
+Prerequisites:
+- NodeJS
+- Docker
+- gcloud CLI (Alternative: use Google Cloud Console)
+- Flutter SDK
+
 ## Getting Started
 
 1. Clone this repository
-2. Start the server (must have NodeJS installed)
+2. Start the server (requires NodeJS)
 ```bash
 cd socketio_server
 npm install
 node index.js
 ```  
-3. Build and run a Docker container locally (must have Docker installed)
+3. Build and run a Docker container locally (requires Docker)
 ```bash
 docker build -t <image_name>:<tag> .
 docker run -d <image_name>
 docker stop <container_ID>
 docker restart <container_ID>
 ```
-4. Build and push an image to Artifact Registry (must have gcloud CLI installed)
+4. Build and push an image to Artifact Registry (requires gcloud CLI)
 ```bash
 gcloud auth login
 gcloud config set project <PROJECT_ID>
@@ -49,7 +57,7 @@ docker push $TAGGED
 # Unset the variable
 unset TAGGED
 ```
-5. Deploy a Cloud Run service from the pushed image
+5. Deploy a Cloud Run service from the pushed image (requires gcloud CLI)
 ```bash
 gcloud services enable run.googleapis.com
 
@@ -59,12 +67,12 @@ gcloud run deploy <SERVICE_NAME> \
   --region <REGION> \
   --allow-unauthenticated
 ```
-6. Run the Flutter app
+6. Run the Flutter app (requires Flutter SDK)
 ```bash
 cd ../flutter_app_client
 flutter pub get
-flutter run
+flutter run # start an app on the connected device
+flutter run -d chrome # start a web app in Chrome
+flutter run -d edge # start a web app in Edge
 ```
-
-![Local Image](./chat_demo.gif)
-
+To run the application on other devices, such as iOS or Android, additional setup may be required.
